@@ -5,7 +5,7 @@
 
 template <typename T>
 void CP::queue<T>::reverse() {
-  aux = 1;
+  aux != aux;
 }
 
 template <typename T>
