@@ -2,21 +2,22 @@
 #define __STUDENT_H_
 
 template <typename T>
-void CP::queue<T>::move_to_front(size_t pos) {
-    if (pos >= mSize) return;
-    if (pos == 0) return;
+void CP::queue<T>::move_to_back(size_t pos) {
+    if (pos >= mSize) return;         
+    if (pos == mSize - 1) return;   
 
+   
     size_t idx = (mFront + pos) % mCap;
-    T tmp = mData[idx];
 
-    for (size_t k = pos; k > 0; k--) {
-        size_t cur = (mFront + k) % mCap;
-        size_t prev = (mFront + k - 1) % mCap;
-        mData[cur] = mData[prev];
+
+    for (size_t k = pos; k < mSize - 1; ++k) {
+        size_t nxt = (idx + 1) % mCap;
+        T tmp = mData[idx];
+        mData[idx] = mData[nxt];
+        mData[nxt] = tmp;
+        idx = nxt;
     }
-
-    mData[mFront] = tmp;
+ 
 }
-
 
 #endif
