@@ -2,7 +2,7 @@
 using namespace std;
 vector<int> dna;
 bool recur(int st,int en,bool rv){
-    if(abs(st-en)==2){
+    if(en-st==2){
         if(!rv){
             return dna[st] == 0 &&dna[st+1]==1;
         }
@@ -10,14 +10,15 @@ bool recur(int st,int en,bool rv){
     }
     int mid = (st+en)/2;
     if(!rv) return (recur(st,mid,true) || recur(st,mid,false) )&& recur(mid,en,false);
-    else return (recur(mid,en,true) || recur(mid,en,false) )&& recur(st,mid,false);
+    else return (recur(mid,en,true) || recur(mid,en,false) )&& recur(st,mid,true);
 }
 int main(){
     ios_base::sync_with_stdio(0);cin.tie(0);
     int n,k;cin>>n>>k;
-    int len = 1<<k;
-    dna.reserve(n);
+    int len = pow(2,k);
+    dna.reserve(len);
     while(n--){
+        dna.resize(len);
         for(int i = 0;i<len;i++){
             cin>>dna[i];
         }
